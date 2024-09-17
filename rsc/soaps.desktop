@@ -1,0 +1,13 @@
+[Desktop Entry]
+Name=Soaps
+# Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+Keywords=utilities
+Comment=Scott Combs Code
+GenericName=Soaps
+Exec=/home/scott/Develop/gtk/soaps/bin/soaps
+# Translators: Do NOT translate or transliterate this text (this is an icon file name)!
+Icon=/home/scott/Develop/gtk/soaps/rsc/soap.png
+StartupNotify=true
+Terminal=false
+Type=Application
+Categories=Utilities;
