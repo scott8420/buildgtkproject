@@ -51,7 +51,21 @@ then
     exit
 fi
 
+NOW=$(date +'%Y-%m-%d %H:%M:%S')
+
 mkdir -p ${Path}/${Name}/bin ${Path}/${Name}/src ${Path}/${Name}/include ${Path}/${Name}/build ${Path}/${Name}/rsc ${Path}/${Name}/.vscode
+
+# README.md
+touch ${Path}/${Name}/README.md
+cat > ${Path}/${Name}/README.md <<EOL
+# ${Name^} Application
+	- Created on: ${NOW}
+	- Author: <Name>
+	- Email: <Email>
+	
+
+This is an auto-generated README file.
+EOL
 
 # AutoTools.sh
 touch ${Path}/${Name}/autotools.sh
@@ -198,7 +212,9 @@ function uninstall() {
 }
 
 function scan() {
-	mv -f ./Makefile.am ./Makefile.am~
+	if [[ -f "./Makefile.am" ]]; then
+		rm -f ./Makefile.am
+	fi
 
 	lastfile=\$(ls "./include/" | tail -1)
 
@@ -286,6 +302,14 @@ function clean() {
 		rm -f ./Makefile.in
 	fi
 
+	if [[ -f "./Makefile.am" ]]; then
+		rm -f ./Makefile.am
+	fi
+
+	if [[ -f "./Makefile.am~" ]]; then
+		rm -f ./Makefile.am~
+	fi
+
 	if [[ -f "./missing" ]]; then
 		rm -f ./missing
 	fi
@@ -306,8 +330,8 @@ function clean() {
 }
 
 function all() {
-	scan
 	clean
+	scan
 	configure
 	build
 }
