@@ -171,6 +171,10 @@ function configure() {
 	sleep 1
 	autoreconf
 
+	if [[! -d "./build" ]]; then
+		mkdir ./build
+	fi
+
 	if [[ -d "./build" ]]; then
 		cd ./build
 		../configure;
@@ -250,6 +254,8 @@ function clean() {
 		fi
 		
 		cd ..
+	else
+		mkdir ./build
 	fi
 
 	if [[ -f "./aclocal.m4" ]]; then
